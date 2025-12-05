@@ -9,6 +9,10 @@ public_users.post("/register", (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
 
+    if(!isValid(username)){
+        return res.status(404).json({message: "Unable to register user."});
+    }
+
     if (username && password) {
         let userswithsamename = users.filter((user) => {
             return user.username === username;
